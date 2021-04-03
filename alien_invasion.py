@@ -1,22 +1,22 @@
 import pygame
-import settings
-import sys
+from settings import Settings
+import game_functions as gf
+from ship import Ship
 
 
 def run_game():
     # 初始化屏幕对象
     pygame.init()
-    game_settings = settings.Settings()
-    screen = pygame.display.set_mode(game_settings.screen_size)
-    pygame.display.set_caption("Alien Invasion")
+    settings = Settings()
+    screen = pygame.display.set_mode(settings.screen_size)
+    pygame.display.set_caption(settings.game_name)
 
+    # 创建飞船对象
+    ship = Ship(screen)
     while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-
-        screen.fill(game_settings.bg_color)
-        pygame.display.flip()
+        gf.check_events(ship)
+        ship.update_position()
+        gf.update_screen(screen, settings, ship)
 
 
 run_game()
