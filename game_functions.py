@@ -1,3 +1,11 @@
+"""
+@Project    ：alien_invasion
+@File       ：game_functions.py
+@Description：游戏的辅助函数文件
+@Author     ：Life
+@Date       ：2021/4/2
+"""
+
 import pygame
 import sys
 

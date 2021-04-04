@@ -1,3 +1,11 @@
+"""
+@Project    ：alien_invasion
+@File       ：alien_invasion.py
+@Description：游戏的运行逻辑部分
+@Author     ：Life
+@Date       ：2021/4/1
+"""
+
 import pygame
 from settings import Settings
 import game_functions as gf
