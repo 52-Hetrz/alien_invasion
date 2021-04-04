@@ -10,6 +10,32 @@ import pygame
 import sys
 
 
+def check_keyup_events(event, ship):
+    """监测键盘弹起事件"""
+    # 根据弹起的按键更新飞船的移动状态
+    if event.key == pygame.K_d:
+        ship.right = False
+    elif event.key == pygame.K_a:
+        ship.left = False
+    elif event.key == pygame.K_w:
+        ship.up = False
+    elif event.key == pygame.K_s:
+        ship.down = False
+
+
+def check_keydown_events(event, ship):
+    """监测键盘按下事件"""
+    # 根据按下的按键更新飞船的移动状态
+    if event.key == pygame.K_d:
+        ship.right = True
+    elif event.key == pygame.K_a:
+        ship.left = True
+    elif event.key == pygame.K_w:
+        ship.up = True
+    elif event.key == pygame.K_s:
+        ship.down = True
+
+
 def check_events(ship):
     """监测鼠标和键盘响应事件"""
 
@@ -17,27 +43,10 @@ def check_events(ship):
         # 点击关闭按钮
         if event.type == pygame.QUIT:
             sys.exit()
-
-        # 飞船的操作部分
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_d:
-                ship.right = True
-            elif event.key == pygame.K_a:
-                ship.left = True
-            elif event.key == pygame.K_w:
-                ship.up = True
-            elif event.key == pygame.K_s:
-                ship.down = True
-
+            check_keydown_events(event, ship)
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_d:
-                ship.right = False
-            elif event.key == pygame.K_a:
-                ship.left = False
-            elif event.key == pygame.K_w:
-                ship.up = False
-            elif event.key == pygame.K_s:
-                ship.down = False
+            check_keyup_events(event, ship)
 
 
 def update_screen(screen, screen_settings, ship):
