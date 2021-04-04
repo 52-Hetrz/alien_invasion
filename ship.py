@@ -26,7 +26,7 @@ class Ship:
         self.rect.centery = self.rect.bottom - size[1] / 2
 
         # 设置飞船的移动速度
-        self.speed = 1
+        self.speed = 2
         self.move_condition = 0
 
         # 设置飞船的移动参数
@@ -41,14 +41,16 @@ class Ship:
 
     def update_position(self):
         """更新飞船的位置"""
-        if self.right and self.check_right_margin():
-            self.rect.centerx += self.speed
-        elif self.left and self.check_left_margin():
-            self.rect.centerx -= self.speed
-        elif self.up and self.check_top_margin():
-            self.rect.centery -= self.speed
-        elif self.down and self.check_bottom_margin():
-            self.rect.centery += self.speed
+        self.move_condition = self.count_move_condition()
+        if not self.move_condition:
+            if self.right and self.check_right_margin():
+                self.rect.centerx += 1
+            elif self.left and self.check_left_margin():
+                self.rect.centerx -= 1
+            elif self.up and self.check_top_margin():
+                self.rect.centery -= 1
+            elif self.down and self.check_bottom_margin():
+                self.rect.centery += 1
 
     def check_top_margin(self):
         """飞船的上边界有效域检测函数"""
@@ -73,3 +75,7 @@ class Ship:
         if self.rect.right >= self.screen_rect.right:
             return False
         return True
+
+    def count_move_condition(self):
+        """根据move_condition和speed计算下一个move_condition的值"""
+        return (self.move_condition + 1) % (7 - self.speed)
