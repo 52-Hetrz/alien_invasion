@@ -1,3 +1,11 @@
+"""
+@Project    ：alien_invasion
+@File       ：ship.py
+@Description：函数的飞船文件
+@Author     ：Life
+@Date       ：2021/4/2
+"""
+
 import pygame
 
 
@@ -15,10 +23,11 @@ class Ship:
         # 设置飞船的中心坐标
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
-        self.rect.centery = self.rect.bottom - size[1]/2
+        self.rect.centery = self.rect.bottom - size[1] / 2
 
         # 设置飞船的移动速度
         self.speed = 1
+        self.move_condition = 0
 
         # 设置飞船的移动参数
         self.right = False
@@ -32,11 +41,35 @@ class Ship:
 
     def update_position(self):
         """更新飞船的位置"""
-        if self.right:
+        if self.right and self.check_right_margin():
             self.rect.centerx += self.speed
-        elif self.left:
+        elif self.left and self.check_left_margin():
             self.rect.centerx -= self.speed
-        elif self.up:
+        elif self.up and self.check_top_margin():
             self.rect.centery -= self.speed
-        elif self.down:
+        elif self.down and self.check_bottom_margin():
             self.rect.centery += self.speed
+
+    def check_top_margin(self):
+        """飞船的上边界有效域检测函数"""
+        if self.rect.top <= self.screen_rect.top:
+            return False
+        return True
+
+    def check_bottom_margin(self):
+        """飞船的下边界有效域检测函数"""
+        if self.rect.bottom >= self.screen_rect.bottom:
+            return False
+        return True
+
+    def check_left_margin(self):
+        """飞船的左边界有效域检测函数"""
+        if self.rect.left <= self.screen_rect.left:
+            return False
+        return True
+
+    def check_right_margin(self):
+        """飞船的右边界有效域检测函数"""
+        if self.rect.right >= self.screen_rect.right:
+            return False
+        return True
