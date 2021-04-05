@@ -7,6 +7,7 @@
 """
 
 import pygame
+from bullet import Bullet
 
 
 class Ship:
@@ -51,6 +52,10 @@ class Ship:
                 self.rect.centery -= 1
             elif self.down and self.check_bottom_margin():
                 self.rect.centery += 1
+
+    def shoot(self):
+        """飞船射击产生子弹"""
+        return Bullet(self.screen, self)
 
     def check_top_margin(self):
         """飞船的上边界有效域检测函数"""
