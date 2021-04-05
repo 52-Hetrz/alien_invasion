@@ -10,7 +10,6 @@ import pygame
 from settings import Settings
 import game_functions as gf
 from ship import Ship
-from bullet import Bullet
 from pygame.sprite import Group
 
 
@@ -27,10 +26,15 @@ def run_game():
     # 创建子弹的集合列表
     bullets = Group()
     while True:
-        gf.check_events(ship, bullets)
+        gf.check_events(ship, bullets, settings)
         ship.update_position()
         bullets.update()
         gf.update_screen(screen, settings, ship, bullets)
+
+        # 删除超出屏幕的子弹
+        for bullet in bullets.copy():
+            if bullet.rect.bottom <= 0:
+                bullets.remove(bullet)
 
 
 run_game()
