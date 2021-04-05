@@ -26,8 +26,9 @@ def check_keyup_events(event, ship):
         ship.down = False
 
 
-def check_keydown_events(event, ship, bullets):
+def check_keydown_events(event, ship, bullets, settings):
     """监测键盘按下事件
+    :param settings:  游戏基本设置
     :param event：    键盘事件
     :param ship：     飞船
     :param bullets：  子弹集合列表
@@ -41,13 +42,14 @@ def check_keydown_events(event, ship, bullets):
         ship.up = True
     elif event.key == pygame.K_s:
         ship.down = True
-    elif event.key == pygame.K_SPACE:
+    elif event.key == pygame.K_SPACE and len(bullets) < settings.bullets_allowed:
         new_bullet = ship.shoot()
         bullets.add(new_bullet)
 
 
-def check_events(ship, bullets):
+def check_events(ship, bullets, settings):
     """监测键盘和鼠标事件
+    :param settings: 游戏基本设置
     :param ship: 飞船
     :param bullets: 子弹的集合列表
     """
@@ -56,7 +58,7 @@ def check_events(ship, bullets):
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ship, bullets)
+            check_keydown_events(event, ship, bullets, settings)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
