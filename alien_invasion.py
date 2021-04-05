@@ -10,6 +10,8 @@ import pygame
 from settings import Settings
 import game_functions as gf
 from ship import Ship
+from bullet import Bullet
+from pygame.sprite import Group
 
 
 def run_game():
@@ -21,10 +23,14 @@ def run_game():
 
     # 创建飞船对象
     ship = Ship(screen)
+
+    # 创建子弹的集合列表
+    bullets = Group()
     while True:
-        gf.check_events(ship)
+        gf.check_events(ship, bullets)
         ship.update_position()
-        gf.update_screen(screen, settings, ship)
+        bullets.update()
+        gf.update_screen(screen, settings, ship, bullets)
 
 
 run_game()
