@@ -17,3 +17,5 @@ class Settings:
         self.bg_color = (230, 230, 230)
         self.screen_size = (self.screen_width, self.screen_height)
         self.game_name = "Alien Invasion"
+        # 允许存在的最多的子弹数量
+        self.bullets_allowed = 4
