@@ -19,3 +19,5 @@ class Settings:
         self.game_name = "Alien Invasion"
         # 允许存在的最多的子弹数量
         self.bullets_allowed = 4
+        # 允许存在的最多的外星人数目
+        self.aliens_allowed = 5

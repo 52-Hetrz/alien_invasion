@@ -10,6 +10,7 @@ import pygame
 from settings import Settings
 import game_functions as gf
 from ship import Ship
+from alien import Alien
 from pygame.sprite import Group
 
 
@@ -23,13 +24,20 @@ def run_game():
     # 创建飞船对象
     ship = Ship(screen)
 
+    # 创建外星人对象
+    alien = Alien(screen)
+
     # 创建子弹的集合列表
     bullets = Group()
+
+    # 创建外星人集合
+    aliens = Group()
     while True:
         gf.check_events(ship, bullets, settings)
         ship.update_position()
         bullets.update()
-        gf.update_screen(screen, settings, ship, bullets)
+        alien.update()
+        gf.update_screen(screen, settings, ship, bullets, alien)
 
         # 删除超出屏幕的子弹
         for bullet in bullets.copy():
